@@ -7,23 +7,23 @@ string Property VersionString Auto
 bool Property bEnablePitchTentPower Auto
 bool Property bEnablePitchMiscPower Auto
 
-;;; Version 0.1.0
-int version = 000100
+;;; Version 1.0.0
+int version = 010000
 
 int Function GetVersion()
-	return version
+	return 010000
 EndFunction
 
 Event OnVersionUpdate(int _version)
-	If version != _version
-		version = version
-		TentPitcher.Reset()
+	If version < 10000
+		Debug.Notification("!!! WARNING !!! You have installed a breaking update to Tent Pitcher.")
+		Debug.Notification("Breaking change: The FormIDs have changed, nothing will work.")
 	EndIf
 EndEvent
 
 Event OnConfigInit()
 	RegisterForModEvent("_Pitch_ModToggled", "OnModToggled")
-	VersionString = "" + version / 10000 + "." + (version / 100) % 10000 + "." + version % 100
+	VersionString = "" + version / 10000 + "." + (version / 100) % 100 + "." + version % 100
 EndEvent
 
 Event OnModToggled(bool _bEnabled)

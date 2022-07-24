@@ -6,7 +6,7 @@
 			"desc": "Pitch a tent",
 			"action": {
 				"type": "CallFunction",
-				"form": "tent_pitcher.esp|230C",
+				"form": "tent_pitcher.esp|802",
 				"scriptName": "_Pitch_TentPitcher_Quest",
 				"function": "DoPitchTent",
 				"params": []
@@ -17,7 +17,7 @@
 			"desc": "Set up a misc item",
 			"action": {
 				"type": "CallFunction",
-				"form": "tent_pitcher.esp|230C",
+				"form": "tent_pitcher.esp|802",
 				"scriptName": "_Pitch_TentPitcher_Quest",
 				"function": "DoPitchMisc",
 				"params": []
