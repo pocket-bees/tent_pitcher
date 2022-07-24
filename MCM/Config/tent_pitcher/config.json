@@ -1,0 +1,90 @@
+{
+	"modName": "tent_pitcher",
+	"displayName": "Tent Pitcher",
+	"content": [
+		{
+			"text": "Mod Control",
+			"type": "header"
+		},
+		{
+			"type": "text",
+			"text": "Version",
+			"help": "Installed mod version",
+			"valueOptions": {
+				"propertyName": "VersionString"
+			}
+		},
+		{
+			"text": "Enable/Disable Mod",
+			"type": "text",
+			"help": "Enable or disable the mod. Disable before uninstalling.",
+			"valueOptions": {
+				"propertyName": "ModStatus"
+			},
+			"action": {
+				"type": "CallFunction",
+				"function": "ToggleEnabled",
+				"params": []
+			}
+		},
+		{
+			"type": "empty"
+		},
+		{
+			"type": "empty"
+		},
+		{
+			"type": "empty"
+		},
+		{
+			"type": "header",
+			"text": "Pitch Tent"
+		},
+		{
+			"type": "empty"
+		},
+		{
+			"type": "toggle",
+			"text": "Enable power?",
+			"id": "_Pitch_PitchTent_Power_Toggle",
+			"valueOptions": {
+				"sourceType": "PropertyValueBool",
+				"propertyName": "bEnablePitchTentPower"
+			}
+		},
+		{
+			"type": "keymap",
+			"id": "_Pitch_PitchTent_Hotkey",
+			"text": "Hotkey",
+			"help": "Hotkey to pitch a tent from your inventory"
+		},
+		{
+			"type": "empty"
+		},
+		{
+			"type": "empty"
+		},
+		{
+			"type": "header",
+			"text": "Pitch Misc"
+		},
+		{
+			"type": "empty"
+		},
+		{
+			"type": "toggle",
+			"text": "Enable power?",
+			"id": "_Pitch_PitchMisc_Power_Toggle",
+			"valueOptions": {
+				"sourceType": "PropertyValueBool",
+				"propertyName": "bEnablePitchMiscPower"
+			}
+		},
+		{
+			"type": "keymap",
+			"id": "_Pitch_PitchMisc_Hotkey",
+			"text": "Hotkey",
+			"help": "Hotkey to pitch a misc item from your inventory"
+		}
+	]
+}

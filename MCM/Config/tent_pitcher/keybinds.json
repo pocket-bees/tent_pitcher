@@ -1,0 +1,27 @@
+{
+	"modName": "tent_pitcher",
+	"keybinds": [
+		{
+			"id": "_Pitch_PitchTent_Hotkey",
+			"desc": "Pitch a tent",
+			"action": {
+				"type": "CallFunction",
+				"form": "tent_pitcher.esp|230C",
+				"scriptName": "_Pitch_TentPitcher_Quest",
+				"function": "DoPitchTent",
+				"params": []
+			}
+		},
+		{
+			"id": "_Pitch_PitchMisc_Hotkey",
+			"desc": "Set up a misc item",
+			"action": {
+				"type": "CallFunction",
+				"form": "tent_pitcher.esp|230C",
+				"scriptName": "_Pitch_TentPitcher_Quest",
+				"function": "DoPitchMisc",
+				"params": []
+			}
+		}
+	]
+}
