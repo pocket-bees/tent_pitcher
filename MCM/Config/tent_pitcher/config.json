@@ -7,12 +7,7 @@
 			"type": "header"
 		},
 		{
-			"type": "text",
-			"text": "Version",
-			"help": "Installed mod version",
-			"valueOptions": {
-				"propertyName": "VersionString"
-			}
+			"type": "empty"
 		},
 		{
 			"text": "Enable/Disable Mod",
@@ -28,7 +23,12 @@
 			}
 		},
 		{
-			"type": "empty"
+			"type": "text",
+			"text": "Mod Version",
+			"help": "Installed mod version",
+			"valueOptions": {
+				"propertyName": "VersionString"
+			}
 		},
 		{
 			"type": "empty"
