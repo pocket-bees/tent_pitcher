@@ -4,6 +4,7 @@ Actor Property PlayerRef Auto
 Spell[] Property Powers Auto
 ; Powers[0] = Pitch Tent
 ; Powers[1] = Pitch Misc
+; Powers[2] = Set Up Camp
 
 ; Parallel form lists.
 ;  MiscObjectList should contain the MiscObjects a player clicks on to start placement
@@ -39,6 +40,12 @@ EndFunction
 ; Place a misc item from the list
 Function DoPitchMisc()
 	Debug.Notification("ERROR: Cannot pitch misc: mod disabled")
+	_RemovePowers()
+EndFunction
+
+; Place any item from the list
+Function DoPitchAny()
+	Debug.Notification("ERROR: Cannot pitch any: mod disabled")
 	_RemovePowers()
 EndFunction
 
@@ -127,6 +134,16 @@ int Function _GetMiscArray()
 	return JDB.solveObj(".tentPitcher.inventoryMisc")
 EndFunction
 
+int Function _GetAnyArray()
+	If !UpdateQueued && JDB.solveObj(".tentPitcher.inventoryAny")
+		return JDB.solveObj(".tentPitcher.inventoryAny")
+	EndIf
+	
+	; Missing array or update needed -- do now
+	_BuildInventoryArrays(true)
+	return JDB.solveObj(".tentPitcher.inventoryAny")
+EndFunction
+
 ; Create an array of objects in the player's inventory, as indices into the FormList properties	
 Function _BuildInventoryArrays(bool _bForce = false)
 	If !UpdateQueued && !_bForce
@@ -136,13 +153,15 @@ Function _BuildInventoryArrays(bool _bForce = false)
 
 	; Create empty arrays
 	If !JDB.solveObjSetter(".tentPitcher.inventoryTents", JArray.object(), true) || \
-	   !JDB.solveObjSetter(".tentPitcher.inventoryMisc", JArray.object(), true)
+	   !JDB.solveObjSetter(".tentPitcher.inventoryMisc", JArray.object(), true) || \
+	   !JDB.solveObjSetter(".tentPitcher.inventoryAny", JArray.object(), true)
 		ConsoleUtil.PrintMessage("Tent Pitcher: ERROR - unable to initialize JArrays")
 		return
 	EndIf
 	
 	int inventoryTents = JDB.solveObj(".tentPitcher.inventoryTents")
 	int inventoryMisc = JDB.solveObj(".tentPitcher.inventoryMisc")
+	int inventoryAny = JDB.solveObj(".tentPitcher.inventoryAny")
 
 	If MiscObjectList.GetSize() != ActivatorList.GetSize()
 		ConsoleUtil.PrintMessage("Tent Pitcher: ERROR - size mismatch between MiscObject and Activator formlists!")
@@ -161,6 +180,8 @@ Function _BuildInventoryArrays(bool _bForce = false)
 			Else
 				JArray.AddInt(inventoryMisc, ixItems)
 			EndIf
+			; Always add to PitchAny
+			JArray.AddInt(inventoryAny, ixItems)
 		EndIf
 		ixItems += 1
 	EndWhile
@@ -214,7 +235,11 @@ State Processing
 	EndFunction
 	
 	Function DoPitchMisc()
-		Debug.Notification("Unable to pitch tent: mod is busy")
+		Debug.Notification("Unable to pitch misc: mod is busy")
+	EndFunction
+	
+	Function DoPitchAny()
+		Debug.Notification("Unable to pitch any: mod is busy")
 	EndFunction
 	
 	Function QueueUpdate()
@@ -253,6 +278,19 @@ State Idling
 			ToggleEnabled()
 		EndIf
 		
+		GoToState("Idling")
+	EndFunction
+	
+	Function DoPitchAny()
+	GoToState("Processing")
+	
+	_DoPitch(_GetAnyArray())
+	
+	If GetState() == ""
+		; Disable triggered during processing
+		ToggleEnabled()
+	EndIf
+	
 		GoToState("Idling")
 	EndFunction
 	

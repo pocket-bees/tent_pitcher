@@ -22,6 +22,17 @@
 				"function": "DoPitchMisc",
 				"params": []
 			}
+		},
+		{
+			"id": "_Pitch_PitchAny_Hotkey",
+			"desc": "Set up a tent or a misc item",
+			"action": {
+				"type": "CallFunction",
+				"form": "tent_pitcher.esp|802",
+				"scriptName": "_Pitch_TentPitcher_Quest",
+				"function": "DoPitchAny",
+				"params": []
+			}
 		}
 	]
 }

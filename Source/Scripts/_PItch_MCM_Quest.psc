@@ -6,19 +6,21 @@ string Property ModStatus Auto
 string Property VersionString Auto
 bool Property bEnablePitchTentPower Auto
 bool Property bEnablePitchMiscPower Auto
+bool Property bEnablePitchAnyPower Auto
 
-;;; Version 1.0.0
-int version = 010000
+;;; Version 1.1.0
+int version = 010100
 
 int Function GetVersion()
-	return 010000
+	return 010100
 EndFunction
 
 Event OnVersionUpdate(int _version)
-	If version < 10000
+	If version / 10000 < _version / 10000
 		Debug.Notification("!!! WARNING !!! You have installed a breaking update to Tent Pitcher.")
-		Debug.Notification("Breaking change: The FormIDs have changed, nothing will work.")
+		return
 	EndIf
+	; 1.0.0 to 1.1.0 requires no management
 EndEvent
 
 Event OnConfigInit()

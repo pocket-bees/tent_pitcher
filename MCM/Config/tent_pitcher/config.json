@@ -85,6 +85,34 @@
 			"id": "_Pitch_PitchMisc_Hotkey",
 			"text": "Hotkey",
 			"help": "Hotkey to pitch a misc item from your inventory"
+		},
+		{
+			"type": "empty"
+		},
+		{
+			"type": "empty"
+		},
+		{
+			"type": "header",
+			"text": "Set Up Camp"
+		},
+		{
+			"type": "empty"
+		},
+		{
+			"type": "toggle",
+			"text": "Enable power?",
+			"id": "_Pitch_PitchAny_Power_Toggle",
+			"valueOptions": {
+				"sourceType": "PropertyValueBool",
+				"propertyName": "bEnablePitchAnyPower"
+			}
+		},
+		{
+			"type": "keymap",
+			"id": "_Pitch_PitchAny_Hotkey",
+			"text": "Hotkey",
+			"help": "Hotkey to place any placeable item in your inventory"
 		}
 	]
 }
