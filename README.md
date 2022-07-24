@@ -1,2 +1,2 @@
-# tent_pitcher
+# Tent Pitcher
 Skyrim mod/Campfire plugin to use a power/hotkey/EasyWheelMenu to place Campfire's placeable items without opening your inventory.
