@@ -1,7 +1,8 @@
 Scriptname _Pitch_TentPitcher_Quest extends Quest  
 
 Actor Property PlayerRef Auto
-Spell[] Property Powers Auto
+Spell[] Property Powers Auto ; Old property: switch to formlist
+FormList Property PowerLst Auto
 ; Powers[0] = Pitch Tent
 ; Powers[1] = Pitch Misc
 ; Powers[2] = Set Up Camp
@@ -20,8 +21,10 @@ Bool Property UpdateQueued Auto
 ; bitmask to keep track of which powers are enabled in the MCM
 int Property mskEnabledPowers = 0x3 Auto
 
+; Dummy property to force recalc of linked properties
+bool Property _dummy101 Auto
+
 ; TODO localization
-; TODO keybinds
 ; TODO see if I can figure out UISelectionMenu and see if it's faster
 ; TODO move power management into a generic spell manager script - it's a lot
 
@@ -76,7 +79,7 @@ Event OnInit()
 EndEvent
 
 Function _SetPowerEnabled(int _ixPower, bool _bEnabled)
-	If _ixPower < 0 || _ixPower >= Powers.length
+	If _ixPower < 0 || _ixPower >= PowerLst.GetSize()
 		return
 	EndIf
 
@@ -87,18 +90,18 @@ Function _SetPowerEnabled(int _ixPower, bool _bEnabled)
 		_GivePowers()
 	Else
 		mskEnabledPowers = Math.LogicalAnd(mskEnabledPowers, Math.LogicalNot(msk))
-		PlayerRef.RemoveSpell(Powers[_ixPower])
+		PlayerRef.RemoveSpell(PowerLst.GetAt(_ixPower) As Spell)
 	EndIf
 EndFunction
 
 Function _GivePowers()
 	int ix = 0
 	int msk = mskEnabledPowers
-	While ix < Powers.length
+	While ix < PowerLst.GetSize()
 		If Math.LogicalAnd(msk, 0x1)
-			PlayerRef.AddSpell(Powers[ix], false)
+			PlayerRef.AddSpell(PowerLst.GetAt(ix) As Spell, false)
 		Else
-			PlayerRef.RemoveSpell(Powers[ix])
+			PlayerRef.RemoveSpell(PowerLst.GetAt(ix) As Spell)
 		EndIf
 		msk = Math.RightShift(msk, 1)
 		ix += 1

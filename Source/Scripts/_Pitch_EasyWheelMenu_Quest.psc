@@ -2,6 +2,7 @@ Scriptname _Pitch_EasyWheelMenu_Quest extends EWM_HandleModBase
 
 _Pitch_TentPitcher_Quest Property TentPitcher Auto
 Spell[] Property Powers Auto
+bool Property _dummy101 Auto
 
 ; Easy Wheel indices
 ; 0 _Pitch_PitchTent

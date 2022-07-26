@@ -1,6 +1,7 @@
 ScriptName _Pitch_MCM_Quest extends MCM_ConfigBase
 
 _Pitch_TentPitcher_Quest Property TentPitcher Auto
+_Pitch_EasyWheelMenu_Quest Property EWM Auto
 
 string Property ModStatus Auto
 string Property VersionString Auto
@@ -8,11 +9,11 @@ bool Property bEnablePitchTentPower Auto
 bool Property bEnablePitchMiscPower Auto
 bool Property bEnablePitchAnyPower Auto
 
-;;; Version 1.1.0
-int version = 010100
+;;; Version 1.1.1
+int version = 010101
 
 int Function GetVersion()
-	return 010100
+	return 010101
 EndFunction
 
 Event OnVersionUpdate(int _version)
@@ -20,7 +21,14 @@ Event OnVersionUpdate(int _version)
 		Debug.Notification("!!! WARNING !!! You have installed a breaking update to Tent Pitcher.")
 		return
 	EndIf
-	; 1.0.0 to 1.1.0 requires no management
+	ConsoleUtil.PrintMessage("Tent Pitcher: Updating from " + version + " to " + _version)
+	
+	If _version == 010101
+		Debug.Notification("Tent Pitcher: Updated to 1.1.1")
+	EndIf
+	
+	version = _version
+	ConsoleUtil.PrintMessage("Tent Pitcher: Update complete.")
 EndEvent
 
 Event OnConfigInit()
@@ -42,6 +50,8 @@ Event OnSettingChange(string a_ID)
 		TentPitcher._SetPowerEnabled(0, bEnablePitchTentPower)
 	ElseIf a_ID == "_Pitch_PitchMisc_Power_Toggle"
 		TentPitcher._SetPowerEnabled(1, bEnablePitchMiscPower)
+	ElseIf a_ID == "_Pitch_PitchAny_Power_Toggle"
+		TentPitcher._SetPowerEnabled(2, bEnablePitchAnyPower)
 	EndIf
 EndEvent
 
