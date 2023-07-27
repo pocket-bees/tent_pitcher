@@ -17,11 +17,11 @@ Event On_Pitch_PitchTent()
 	TentPitcher.DoPitchTent()
 EndEvent
 
-Event On_Pitch_Misc()
+Event On_Pitch_PitchMisc()
 	TentPitcher.DoPitchMisc()
 EndEvent
 
-Event On_Pitch_Any()
+Event On_Pitch_PitchAny()
 	TentPitcher.DoPitchAny()
 EndEvent
 
