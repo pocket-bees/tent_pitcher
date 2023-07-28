@@ -9,11 +9,11 @@ bool Property bEnablePitchTentPower Auto
 bool Property bEnablePitchMiscPower Auto
 bool Property bEnablePitchAnyPower Auto
 
-;;; Version 1.1.1
-int version = 010101
+;;; Version 1.1.2
+int version = 010102
 
 int Function GetVersion()
-	return 010101
+	return 010102
 EndFunction
 
 Event OnVersionUpdate(int _version)
@@ -23,8 +23,8 @@ Event OnVersionUpdate(int _version)
 	EndIf
 	ConsoleUtil.PrintMessage("Tent Pitcher: Updating from " + version + " to " + _version)
 	
-	If _version == 010101
-		Debug.Notification("Tent Pitcher: Updated to 1.1.1")
+	If _version == 010102
+		Debug.Notification("Tent Pitcher: Updated to 1.1.2")
 	EndIf
 	
 	version = _version
